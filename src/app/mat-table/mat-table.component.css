@@ -1,0 +1,8 @@
+.full-width-table {
+  width: 100%;
+}
+
+td {
+  padding: 10px;
+  margin: 10px;
+}

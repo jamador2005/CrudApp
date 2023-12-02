@@ -1,0 +1,57 @@
+<table class="example-full-width" cellspacing="0">
+    <tr>
+        <td colspan="3">
+            <h3>Search filters</h3>
+            <hr>
+        </td>
+        
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field type="number" class="example-full-width">
+                <mat-label>Instance number</mat-label>
+                <input matInput placeholder="" formControlName="instance">
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field class="example-full-width">
+                <mat-label>Process name</mat-label>
+                <mat-select formControlName="select">
+                    <mat-option *ngFor="let proc of processesList" [value]="proc">
+                        {{proc}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field class="example-full-width">
+                <mat-label>Created by</mat-label>
+                <input matInput placeholder="firstName.lastName" formControlName="startedBy">
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <mat-form-field class="example-full-width">
+                <mat-label>Creation date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate placeholder="Start date">
+                    <input matEndDate placeholder="End date">
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field class="example-full-width">
+                <mat-label>Content search</mat-label>
+                <input matInput placeholder="" formControlName="email">
+            </mat-form-field>
+        </td>
+        <td align="right">
+            <button mat-raised-button color="primary">Search</button>
+            <button mat-raised-button color="accent">Reset</button>
+        </td>
+    </tr>
+</table>
