@@ -31,9 +31,12 @@ export class SearchComponent {
 
   resetButton() {
     console.log("Reset button clicked");
-    console.log(this.instanceNumber);
-    console.log(this.processName);
-    console.log(this.createdBy);
+    this.instanceNumber = 0;
+    this.processName = '';
+    this.createdBy = '';
+    this.startDate = new Date() ;
+    this.endDate = new Date;
+    this.contextSearch = '';
   }
 
 }
