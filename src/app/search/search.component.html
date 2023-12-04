@@ -4,13 +4,17 @@
             <h3>Search filters</h3>
             <hr>
         </td>
-        
+
     </tr>
     <tr>
         <td>
-            <mat-form-field type="number" class="example-full-width">
+            <mat-form-field class="example-full-width">
                 <mat-label>Instance number</mat-label>
-                <input matInput placeholder="" formControlName="instance">
+                <input matInput type="number" min="10000" max="999999" placeholder="number 5-6 digits"
+                    [(ngModel)]="instanceNumber" ng-init="instanceNumber=null">
+                <button *ngIf="instanceNumber" matSuffix mat-icon-button aria-label="Clear" (click)="instanceNumber=0">
+                    <mat-icon>close</mat-icon>
+                </button>
             </mat-form-field>
         </td>
         <td>
@@ -26,7 +30,10 @@
         <td>
             <mat-form-field class="example-full-width">
                 <mat-label>Created by</mat-label>
-                <input matInput placeholder="firstName.lastName" formControlName="startedBy">
+                <input matInput type="text" placeholder="firstName.lastName" [(ngModel)]="createdBy">
+                <button *ngIf="createdBy" matSuffix mat-icon-button aria-label="Clear" (click)="createdBy=''">
+                    <mat-icon>close</mat-icon>
+                </button>
             </mat-form-field>
         </td>
     </tr>
@@ -35,10 +42,9 @@
             <mat-form-field class="example-full-width">
                 <mat-label>Creation date range</mat-label>
                 <mat-date-range-input [rangePicker]="picker">
-                    <input matStartDate placeholder="Start date">
-                    <input matEndDate placeholder="End date">
+                    <input matStartDate placeholder="Start date" [(ngModel)]="startDate">
+                    <input matEndDate placeholder="End date" [(ngModel)]="endDate">
                 </mat-date-range-input>
-                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker></mat-date-range-picker>
             </mat-form-field>
@@ -46,12 +52,15 @@
         <td>
             <mat-form-field class="example-full-width">
                 <mat-label>Content search</mat-label>
-                <input matInput placeholder="" formControlName="email">
+                <input matInput type="text" placeholder="search terms space separated" [(ngModel)]="contextSearch">
+                <button *ngIf="contextSearch" matSuffix mat-icon-button aria-label="Clear" (click)="contextSearch=''">
+                    <mat-icon>close</mat-icon>
+                </button>
             </mat-form-field>
         </td>
         <td align="right">
-            <button mat-raised-button color="primary">Search</button>
-            <button mat-raised-button color="accent">Reset</button>
+            <button (click)="searchButton()" mat-raised-button color="primary">Search</button>
+            <button (click)="resetButton()" mat-raised-button color="accent">Reset values</button>
         </td>
     </tr>
 </table>
