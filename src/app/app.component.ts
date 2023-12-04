@@ -1,19 +1,42 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PrefsComponent } from './prefs/prefs.component';
+import { Country } from './model/instance.model';
+import { ApiService } from './services/api.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+
+  ngOnInit(){
+    this.fetchCountries();
+  }
+
   title = 'crud-app';
 
-  constructor(private _dialog: MatDialog) {}
+  listCountries!: Country[];
 
-  openPrefsForm()
-  { 
+  constructor(
+    private _dialog: MatDialog,
+    private _apiCall: ApiService
+  ) { }
+
+  openPrefsForm() {
     this._dialog.open(PrefsComponent);
   }
+
+  
+  fetchCountries(){
+    this._apiCall.getCountry().subscribe(data=>{
+      this.listCountries = data
+      console.log('list of countries',this.listCountries)
+    })
+  }
+  
+
+
+
 }
