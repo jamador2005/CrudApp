@@ -1,4 +1,21 @@
 {
+  "country": [
+    {
+      "id": 1,
+      "title": "Portugal",
+      "author": "PT"
+    },
+    {
+      "id": 2,
+      "title": "France",
+      "author": "fr"
+    },
+    {
+      "id": 3,
+      "title": "Spain",
+      "author": "es"
+    }
+  ],
   "posts": [
     {
       "id": 1,
@@ -24,5 +41,4 @@
     "radio": "typicode",
     "select": "typicode"
   }
-
 }
