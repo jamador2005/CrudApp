@@ -30,7 +30,7 @@ const EXAMPLE_DATA: MatTableItem[] = [
   {id: 16, name: 'Sulfur'},
   {id: 17, name: 'Chlorine'},
   {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
+  {id: 19, name: 'Potam'},
   {id: 20, name: 'Calcium'},
 ];
 

@@ -20,7 +20,7 @@
         <td>
             <mat-form-field class="example-full-width">
                 <mat-label>Process name</mat-label>
-                <mat-select formControlName="select">
+                <mat-select formControlName="select" [(value)]="processName">
                     <mat-option *ngFor="let proc of processesList" [value]="proc">
                         {{proc}}
                     </mat-option>

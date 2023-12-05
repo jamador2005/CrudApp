@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { MatTableDataSource, MatTableItem } from './mat-table-datasource';
+import { SearchComponent } from '../search/search.component';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-mat-table',
@@ -26,5 +28,7 @@ export class MatTableComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+
+    console.log("ngAfterViewInit() mat table component ts");
   }
 }

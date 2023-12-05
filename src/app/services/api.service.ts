@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { Country } from '../model/instance.model'
 
 
-// https://countrystatecity.in/
-
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +15,20 @@ export class ApiService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-type': 'application/json',
-      'X-CSCAPI-KEY': ''
+      'X-CSCAPI-KEY': '',
+      'Access-Control-Allow-Origin': '*'
     })
   }
 
   getCountry(): Observable<any>{
     return this.hhtpclient.get('http://localhost:3000/country')
   }
+
+  getInstance(instanceNumber:number): Observable<any>{
+    console.log("starting getInstance() with parm : " + instanceNumber);
+    return this.hhtpclient.get('https://archive-backend-corp-baw-dev.apps.caas.intranet.geodis.org/api2/getInstanceByINSTANCE_ID/'+instanceNumber,this.httpOptions)
+  }
+
+
 }
 

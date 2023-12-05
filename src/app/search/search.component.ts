@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DateRange } from '@angular/material/datepicker'; 
+import { Instance } from '../model/instance.model'
+import { ApiService } from '../services/api.service'
 
 @Component({
   selector: 'app-search',
@@ -7,6 +9,12 @@ import { DateRange } from '@angular/material/datepicker';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
+
+  constructor(
+    private _apiCall: ApiService
+  ) { }
+
+  public listInstances!: Instance[];
 
   instanceNumber: number = 0;
   processName: string = '';
@@ -27,6 +35,27 @@ export class SearchComponent {
     console.log(this.startDate);
     console.log(this.endDate);
     console.log(this.contextSearch);
+    this.fetchInstances(
+      this.instanceNumber,
+      this.processName,
+      this.createdBy,
+      this.startDate,
+      this.endDate,
+      this.contextSearch);
+
+  }
+
+  fetchInstances(
+    instanceNumber:number,
+    processName:string,
+    createdBy:string,
+    startDate:Date,
+    endDate:Date,
+    contextSearch:string) {
+    this._apiCall.getInstance(this.instanceNumber).subscribe(data => {
+      this.listInstances = data
+      console.log('list of instances', this.listInstances)
+    })
   }
 
   resetButton() {
