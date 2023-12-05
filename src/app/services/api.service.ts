@@ -15,13 +15,14 @@ export class ApiService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-type': 'application/json',
-      'X-CSCAPI-KEY': '',
+      'X-CSCAPI-KEY': 'NXBDeWtHd2hWTkF4d2Y3NXdYb1dOZ3VhSURvYXRjMzNLYm9WNTdDMA==',
       'Access-Control-Allow-Origin': '*'
     })
   }
 
   getCountry(): Observable<any>{
-    return this.hhtpclient.get('http://localhost:3000/country')
+    console.log("starting getCountry()");
+    return this.hhtpclient.get<Country>('https://api.countrystatecity.in/v1/countries',this.httpOptions)
   }
 
   getInstance(instanceNumber:number): Observable<any>{
