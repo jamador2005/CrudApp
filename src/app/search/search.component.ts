@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
-import { DateRange } from '@angular/material/datepicker'; 
+import { Component, OnInit } from '@angular/core';
+import { DateRange } from '@angular/material/datepicker';
 import { Instance } from '../model/instance.model'
 import { ApiService } from '../services/api.service'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 
   constructor(
     private _apiCall: ApiService
@@ -19,8 +20,8 @@ export class SearchComponent {
   instanceNumber: number = 0;
   processName: string = '';
   createdBy: string = '';
-  startDate:Date=new Date;
-  endDate:Date=new Date;
+  startDate: Date = new Date;
+  endDate: Date = new Date;
   contextSearch: string = '';
 
   processesList: string[] = [
@@ -46,12 +47,12 @@ export class SearchComponent {
   }
 
   fetchInstances(
-    instanceNumber:number,
-    processName:string,
-    createdBy:string,
-    startDate:Date,
-    endDate:Date,
-    contextSearch:string) {
+    instanceNumber: number,
+    processName: string,
+    createdBy: string,
+    startDate: Date,
+    endDate: Date,
+    contextSearch: string) {
     this._apiCall.getInstance(this.instanceNumber).subscribe(data => {
       this.listInstances = data
       console.log('list of instances', this.listInstances)
@@ -63,9 +64,27 @@ export class SearchComponent {
     this.instanceNumber = 0;
     this.processName = '';
     this.createdBy = '';
-    this.startDate = new Date() ;
+    this.startDate = new Date();
     this.endDate = new Date;
     this.contextSearch = '';
   }
+
+  ngOnInit() {
+    //create the observer
+    const observer = {
+      next: (item: unknown) => console.log('item arrived ${item}'),
+      error: (err: unknown) => console.log('We have an error ${err}'),
+      complete: () => console.log('stream complete')
+    }
+
+    // create the observable
+    const stream = new Observable(myObserver => {
+      myObserver.next(this.instanceNumber);
+    })
+
+    stream.subscribe(observer);
+  }
+
+
 
 }
