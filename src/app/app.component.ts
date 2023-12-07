@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PrefsComponent } from './prefs/prefs.component';
 import { Country, Instance } from './model/instance.model';
-import { ApiService } from './services/api.service'
+import { ApiService } from './services/api/api.service'
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
