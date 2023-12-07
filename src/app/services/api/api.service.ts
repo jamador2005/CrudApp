@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs';
-import { Country } from '../model/instance.model'
+import { Country } from '../../model/instance.model'
 
 
 

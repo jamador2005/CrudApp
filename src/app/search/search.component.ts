@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DateRange } from '@angular/material/datepicker';
 import { Instance } from '../model/instance.model'
-import { ApiService } from '../services/api.service'
+import { ApiService } from '../services/api/api.service'
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,9 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class SearchComponent implements OnInit {
 
-  constructor(
-    private _apiCall: ApiService
-  ) { }
+  constructor(private _apiCall: ApiService) { }
 
   public listInstances!: Instance[];
 
@@ -69,21 +67,7 @@ export class SearchComponent implements OnInit {
     this.contextSearch = '';
   }
 
-  ngOnInit() {
-    //create the observer
-    const observer = {
-      next: (item: unknown) => console.log('item arrived ${item}'),
-      error: (err: unknown) => console.log('We have an error ${err}'),
-      complete: () => console.log('stream complete')
-    }
-
-    // create the observable
-    const stream = new Observable(myObserver => {
-      myObserver.next(this.instanceNumber);
-    })
-
-    stream.subscribe(observer);
-  }
+  ngOnInit() {}
 
 
 
