@@ -23,9 +23,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
