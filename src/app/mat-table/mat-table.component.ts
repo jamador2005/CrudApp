@@ -5,6 +5,9 @@ import { MatTable } from '@angular/material/table';
 import { MatTableDataSource, MatTableItem } from './mat-table-datasource';
 import { SearchComponent } from '../search/search.component';
 import { AppComponent } from '../app.component';
+import { ApiService } from '../services/api/api.service';
+import { Country } from '../model/instance.model';
+import { Observable, connect } from 'rxjs';
 
 @Component({
   selector: 'app-mat-table',
@@ -28,11 +31,17 @@ export class MatTableComponent implements AfterViewInit {
   ];
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
 
-  constructor() {
+  displayedColumns = ['id', 'name','iso2'];
+
+  constructor(private apiService: ApiService) {
     this.dataSource = new MatTableDataSource();
   }
+
+  
+  /*ngOnInit{
+
+  }*/
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
@@ -49,6 +58,7 @@ export class MatTableComponent implements AfterViewInit {
     console.log(this.startDate);
     console.log(this.endDate);
     console.log(this.contextSearch);
+    this.getCountries();
   }
 
   resetButton(){
@@ -59,5 +69,37 @@ export class MatTableComponent implements AfterViewInit {
     this.startDate = new Date() ;
     this.endDate = new Date;
     this.contextSearch = '';
+    while (this.dataSource.data.length) {
+      this.dataSource.data.pop();
+    }
+    this.paginator._changePageSize(5);
   }
+
+  //countryArray:Country[] = [];
+  countries$ = new Observable<Country[]>()
+
+  getCountries(){
+    while (this.dataSource.data.length){
+      this.dataSource.data.pop();
+    }
+    //this.dataSource.data.forEach(this.dataSource.data.pop());
+    this.paginator._changePageSize(5);
+    this.countries$ =  this.apiService.getCountry();
+    this.countries$.subscribe(
+      countries => {
+        countries.forEach(
+          country => {
+                //console.log(country);;
+                this.dataSource.data.push(country);
+                //this.countryArray.push(country);
+          }
+         )
+        //this.table.renderRows();
+        this.paginator._changePageSize(5);
+        //console.log(this.countryArray);
+      }
+    )
+  }  
+
+
 }

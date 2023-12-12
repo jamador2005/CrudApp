@@ -1,7 +1,7 @@
-<table class="full-width-table" cellspacing="0">
+<table class="example-full-width" cellspacing="0">
     <tr>
         <td colspan="3">
-            <h3>Search filters</h3>
+            <h3>Search filters (Search component)</h3>
             <hr>
         </td>
 
@@ -66,44 +66,30 @@
 </table>
 
 
-<table class="full-width-table">
-    <tr>
-        <td>
-            <h3>Search results</h3>
-            <hr>
-        </td>
-    </tr>
-    <tr>
-        <td>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-            <div class="mat-elevation-z8">
-                <table mat-table class="full-width-table" matSort aria-label="Elements">
-                    <!-- Id Column -->
-                    <ng-container matColumnDef="id">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-                        <td mat-cell *matCellDef="let row">{{row.id}}</td>
-                    </ng-container>
+    <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
 
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-                        <td mat-cell *matCellDef="let row">{{row.name}}</td>
-                    </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
 
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="iso2">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Iso2</th>
-                        <td mat-cell *matCellDef="let row">{{row.iso2}}</td>
-                    </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
 
-                <mat-paginator #paginator [length]="dataSource?.data?.length" [pageIndex]="0" [pageSize]="5"
-                    [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
-                </mat-paginator>
-            </div>
-        </td>
-    </tr>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="iso2">
+        <th mat-header-cell *matHeaderCellDef> Weight </th>
+        <td mat-cell *matCellDef="let element"> {{element.iso2}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

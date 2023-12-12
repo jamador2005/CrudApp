@@ -10,7 +10,7 @@ import { Country } from '../../model/instance.model'
 })
 export class ApiService {
 
-  constructor(private hhtpclient: HttpClient) { }
+  constructor(private hhtpclient: HttpClient) {}
 
   httpOptions = {
     headers: new HttpHeaders({

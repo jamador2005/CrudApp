@@ -4,6 +4,7 @@ import { PrefsComponent } from './prefs/prefs.component';
 import { Country, Instance } from './model/instance.model';
 import { ApiService } from './services/api/api.service'
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,14 +14,26 @@ import { MatTableDataSource } from '@angular/material/table';
 export class AppComponent implements OnInit {
 
   ngOnInit() {
-    this.fetchCountries();
+    //this.fetchCountries();
     //this.fetchInstances();
   }
 
   title = 'crud-app';
 
+  instanceNumber: number = 0;
+  processName: string = '';
+  createdBy: string = '';
+  startDate: Date = new Date;
+  endDate: Date = new Date;
+  contextSearch: string = '';
+
+  processesList: string[] = [
+    'proc-0', 'proc-1', 'proc-2'
+  ];
+
   listCountries!: Country[];
   listInstances!: Instance[];
+  countries$ = new Observable<Country[]>();
 
   constructor(
     private _dialog: MatDialog,
@@ -31,7 +44,27 @@ export class AppComponent implements OnInit {
     this._dialog.open(PrefsComponent);
   }
 
-  
+  searchButton(){
+    console.log("Search button clicked");
+    console.log(this.instanceNumber);
+    console.log(this.processName);
+    console.log(this.createdBy);
+    console.log(this.startDate);
+    console.log(this.endDate);
+    console.log(this.contextSearch);
+    this.countries$ = this._apiCall.getCountry();
+    //this.fetchCountries();
+  }
+  resetButton(){ 
+    console.log("Reset button clicked");
+    this.instanceNumber = 0;
+    this.processName = '';
+    this.createdBy = '';
+    this.startDate = new Date();
+    this.endDate = new Date;
+    this.contextSearch = '';
+  }
+
   fetchCountries() {
     this._apiCall.getCountry().subscribe(data => {
       this.listCountries = data
@@ -46,8 +79,5 @@ export class AppComponent implements OnInit {
     })
   }
   
-
-
-
 
 }

@@ -4,35 +4,22 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
+
 // TODO: Replace this with your own data model type
 export interface MatTableItem {
   name: string;
   id: number;
+  iso2: string;
 }
 
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: MatTableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potam'},
-  {id: 20, name: 'Calcium'},
+  /*
+  {id: 1, name: 'Hydrogen',iso2:'zz'},
+  {id: 2, name: 'Helium',iso2:'ee'},
+  {id: 3, name: 'Lithium',iso2:'cc'}
+  */
 ];
 
 /**
@@ -48,6 +35,7 @@ export class MatTableDataSource extends DataSource<MatTableItem> {
   constructor() {
     super();
   }
+
 
   /**
    * Connect this data source to the table. The table will only update when
