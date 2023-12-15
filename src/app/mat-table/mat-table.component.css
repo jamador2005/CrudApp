@@ -20,3 +20,12 @@ button {
   padding: 10px;
   margin: 10px;
 }
+
+hidden{
+  visibility:hidden;
+}
+
+.loading {
+  z-index:99999;
+  position: relative;
+}

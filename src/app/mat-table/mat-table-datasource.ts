@@ -7,9 +7,13 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface MatTableItem {
-  name: string;
+  process_app: string;
   id: number;
-  iso2: string;
+  status: string;
+  instance_id:number;
+  json_data:string;
+  run_id:number;
+  timestamp:string;
 }
 
 
@@ -86,7 +90,7 @@ export class MatTableDataSource extends DataSource<MatTableItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
+        //case 'name': return compare(a.name, b.name, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
         default: return 0;
       }

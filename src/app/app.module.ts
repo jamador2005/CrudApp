@@ -23,6 +23,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { Observable } from 'rxjs';
     MatPaginatorModule,
     MatSortModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

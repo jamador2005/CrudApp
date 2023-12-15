@@ -1,11 +1,5 @@
 <table class="full-width-table" cellspacing="0">
-    <tr>
-        <td colspan="3">
-            <h3>Search filters</h3>
-            <hr>
-        </td>
 
-    </tr>
     <tr>
         <td>
             <mat-form-field class="example-full-width">
@@ -19,6 +13,16 @@
         </td>
         <td>
             <mat-form-field class="example-full-width">
+                <mat-label>Instance status</mat-label>
+                <mat-select formControlName="select" [(value)]="instanceStatus">
+                    <mat-option *ngFor="let status of statusList" [value]="status">
+                        {{status}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field class="example-full-width">
                 <mat-label>Process name</mat-label>
                 <mat-select formControlName="select" [(value)]="processName">
                     <mat-option *ngFor="let proc of processesList" [value]="proc">
@@ -27,6 +31,9 @@
                 </mat-select>
             </mat-form-field>
         </td>
+
+    </tr>
+    <tr>
         <td>
             <mat-form-field class="example-full-width">
                 <mat-label>Created by</mat-label>
@@ -36,8 +43,6 @@
                 </button>
             </mat-form-field>
         </td>
-    </tr>
-    <tr>
         <td>
             <mat-form-field class="example-full-width">
                 <mat-label>Creation date range</mat-label>
@@ -49,6 +54,7 @@
                 <mat-date-range-picker #picker></mat-date-range-picker>
             </mat-form-field>
         </td>
+
         <td>
             <mat-form-field class="example-full-width">
                 <mat-label>Content search</mat-label>
@@ -58,42 +64,69 @@
                 </button>
             </mat-form-field>
         </td>
-        <td align="right">
-            <button (click)="searchButton()" mat-raised-button color="primary">Search</button>
-            <button (click)="resetButton()" mat-raised-button color="accent">Reset values</button>
-        </td>
     </tr>
 </table>
 
+<div align="right">
+
+    <button (click)="searchButton()" mat-raised-button color="primary">Search</button>
+    <button (click)="resetButton()" mat-raised-button color="primary">Reset values</button>
+
+</div>
+
+<div class="loading" align="center" *ngIf="searching">
+    <mat-spinner class="loading"></mat-spinner>
+</div>
 
 <table class="full-width-table">
-    <tr>
-        <td>
-            <h3>Search results</h3>
-            <hr>
-        </td>
-    </tr>
+
     <tr>
         <td>
 
             <div class="mat-elevation-z8">
                 <table mat-table class="full-width-table" matSort aria-label="Elements">
-                    <!-- Id Column -->
-                    <ng-container matColumnDef="id">
+
+                    <ng-container matColumnDef="id" class="hidden">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
                         <td mat-cell *matCellDef="let row">{{row.id}}</td>
                     </ng-container>
 
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-                        <td mat-cell *matCellDef="let row">{{row.name}}</td>
+                    <ng-container matColumnDef="run_id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Run Id</th>
+                        <td mat-cell *matCellDef="let row">{{row.run_id}}</td>
                     </ng-container>
 
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="iso2">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Iso2</th>
-                        <td mat-cell *matCellDef="let row">{{row.iso2}}</td>
+                    <ng-container matColumnDef="timestamp">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>timestamp</th>
+                        <td mat-cell *matCellDef="let row">{{row.timestamp}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="instance_id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>instance_id</th>
+                        <td mat-cell *matCellDef="let row">{{row.instance_id}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="process_app">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>process_app</th>
+                        <td mat-cell *matCellDef="let row">{{row.process_app}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>status</th>
+                        <td mat-cell *matCellDef="let row">{{row.status}}</td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="json_data">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Business data</th>
+                        <td mat-cell *matCellDef="let row">{{row.json_data}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                        <td mat-cell>
+
+                        </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
